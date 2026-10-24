@@ -6,7 +6,7 @@ $default = [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=aktivexpressdb',
     'username' => 'root',
-    'password' => '2402',
+    'password' => '',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
