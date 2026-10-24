@@ -1,0 +1,14 @@
+$kind: http-request
+url: https://devapi.aktivexpress.uz/login
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: phone
+      value: "998909984031"
+      description: "Телефон номер (Пример: 998909984031)"
+    - type: text
+      key: code
+      value: "93914"
+order: 3000

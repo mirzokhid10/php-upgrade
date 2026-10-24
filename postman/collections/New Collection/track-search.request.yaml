@@ -1,0 +1,11 @@
+$kind: http-request
+name: track-search
+url: http://localhost:8060/track-search?text=900169506
+method: GET
+queryParams:
+  text: "900169506"
+auth:
+  credentials:
+    token: PFCpeXAIXDfbMk7tSl9_sbf7uYOQTumXpA2H5v54jgyqCwWDNGQCIrQ-VAgka4-d
+  type: bearer
+order: 5000

@@ -1,0 +1,9 @@
+$kind: http-request
+name: signup-phone
+url: http://localhost:8060/user-auth/signup-phone?phone=998900169506
+method: POST
+queryParams:
+  - key: phone
+    value: "998900169506"
+    $type: ""
+order: 2000

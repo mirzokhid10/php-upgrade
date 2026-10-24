@@ -1,0 +1,15 @@
+$kind: http-request
+name: Client user search barcode/phone
+url: https://devapi.aktivexpress.uz/auth-signup-code
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: phone
+      value: "998900169506"
+      description: "Телефон номер (Пример: 998909984031)"
+    - type: text
+      key: code
+      value: "32599"
+order: 6000

@@ -1,0 +1,22 @@
+$kind: http-request
+url: https://devapi.aktivexpress.uz/waybill-comment
+method: POST
+headers:
+  Authorization: Bearer hDaOSFKVM5dAf-hw_2adDQv3TZhf5fL_61pDV_GL--XNZEhj2NPl5ttlDOcytYcX
+body:
+  type: formdata
+  content:
+    - type: text
+      key: id
+      value: "1600745"
+    - type: text
+      key: comment
+      value: go_delivery
+      description: |-
+        go_delivery
+        phone_not_found
+        phone_switch_off
+        phone_wrong
+        phone_no_answer
+        wrong_address
+order: 2000

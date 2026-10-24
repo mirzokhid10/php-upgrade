@@ -1,0 +1,10 @@
+actor: ApiTester
+modules:
+    enabled:
+        - Asserts
+        - Yii2:
+            configFile: 'config/test.php'
+            cleanup: true
+        - REST:
+            url: /
+            depends: Yii2

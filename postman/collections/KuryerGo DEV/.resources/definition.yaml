@@ -1,0 +1,7 @@
+$kind: collection
+name: KuryerGo DEV
+variables:
+  - key: auth_secret_0ho8
+    secret: true
+  - key: auth_secret_01jf
+    secret: true

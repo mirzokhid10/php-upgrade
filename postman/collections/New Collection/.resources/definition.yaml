@@ -1,0 +1,5 @@
+$kind: collection
+name: New Collection
+variables:
+  - key: auth_secret_0ho8
+    secret: true

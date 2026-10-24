@@ -1,0 +1,11 @@
+$kind: http-request
+name: track-history
+url: GET https://devapi.aktivexpress.uz/track-history?id=1397855
+method: GET
+queryParams:
+  id: "1397855"
+auth:
+  type: bearer
+  credentials:
+    token: -xx-s_-aClq4C6wrSc-4ZFuhvVIROFN-kdPJUdF5j1XgImHUwZXo9NFv18t-JEUC
+order: 10715

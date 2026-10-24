@@ -1,0 +1,11 @@
+$kind: http-request
+name: track-search
+url: https://devapi.aktivexpress.uz/track-search?text=998900169506
+method: GET
+queryParams:
+  text: "998900169506"
+auth:
+  type: bearer
+  credentials:
+    token: "{{auth_secret_0ho8}}"
+order: 9000
