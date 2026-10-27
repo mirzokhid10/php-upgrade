@@ -2,9 +2,7 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
-use yii\helpers\FileHelper;
 
 
 /**
@@ -28,8 +26,8 @@ class SignupCodeForm extends Model
         return [
             [['phone'], 'required', 'message' => 'Phone number is requied.'],
             [['code'], 'required', 'message' => 'SMS code is requied.'],
-            [['phone'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['phone' => 'username'], 'message' => 'Phone number not found.'],
-            [['code'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['code' => 'sms_code'], 'message' => 'Sms code incorrect'],
+            [['phone'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['phone' => 'username'], 'message' => 'Phone number not found.'],
+            [['code'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['code' => 'sms_code'], 'message' => 'Sms code incorrect'],
         ];
     }
 
@@ -55,7 +53,10 @@ class SignupCodeForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->phone);
+            $this->_user = User::findOne([
+                'username' => $this->phone,
+                'sms_code' => $this->code   
+            ]);
         }
 
         return $this->_user;

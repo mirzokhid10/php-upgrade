@@ -1,6 +1,6 @@
 $kind: http-request
 name: track-history
-url: GET https://devapi.aktivexpress.uz/track-history?id=1397855
+url: http://localhost:8080/track-history?id=1397855
 method: GET
 queryParams:
   id: "1397855"

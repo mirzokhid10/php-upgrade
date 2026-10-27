@@ -109,7 +109,7 @@ class Waybill extends ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className()
+                'class' => TimestampBehavior::class
             ]
         ];
     }
@@ -261,8 +261,8 @@ class Waybill extends ActiveRecord
             $barcode = $startBarcode . date('m') . date('y') . $this->id;
         }
 
-        if (strlen($barcode) < 12) {
-            $barcode .= str_repeat('0', 12 - strlen($barcode));
+        if (strlen($barcode ?? '') < 12) {
+            $barcode .= str_repeat('0', 12 - strlen($barcode ?? ''));
         }
         $this->barcode = $barcode;
 
@@ -481,7 +481,7 @@ class Waybill extends ActiveRecord
         }
         $this->searchable_data = $searchable_data;
 
-        if (strlen($this->to_phone_number) == 9) {
+        if (strlen($this->to_phone_number ?? '') == 9) {
             if (preg_match('/(\d{2})(\d{3})(\d{2})(\d{2})$/', $this->to_phone_number, $matches)) {
                 $this->to_phone_number = '+998' . $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4];
             }
@@ -842,7 +842,7 @@ class Waybill extends ActiveRecord
      */
     public function getFromBranch()
     {
-        return $this->hasOne(Branch::className(), ['id' => 'from_branch_id']);
+        return $this->hasOne(Branch::class, ['id' => 'from_branch_id']);
     }
 
     /**
@@ -850,7 +850,7 @@ class Waybill extends ActiveRecord
      */
     public function getToBranch()
     {
-        return $this->hasOne(Branch::className(), ['id' => 'to_branch_id']);
+        return $this->hasOne(Branch::class, ['id' => 'to_branch_id']);
     }
 
     /**
@@ -858,7 +858,7 @@ class Waybill extends ActiveRecord
      */
     public function getFromRegion()
     {
-        return $this->hasOne(Region::className(), ['id' => 'from_region_id']);
+        return $this->hasOne(Region::class, ['id' => 'from_region_id']);
     }
 
     /**
@@ -866,7 +866,7 @@ class Waybill extends ActiveRecord
      */
     public function getBag()
     {
-        return $this->hasOne(Region::className(), ['id' => 'from_region_id']);
+        return $this->hasOne(Region::class, ['id' => 'from_region_id']);
     }
 
     /**
@@ -874,7 +874,7 @@ class Waybill extends ActiveRecord
      */
     public function getFromCity()
     {
-        return $this->hasOne(City::className(), ['id' => 'from_city_id']);
+        return $this->hasOne(City::class, ['id' => 'from_city_id']);
     }
 
     /**
@@ -882,7 +882,7 @@ class Waybill extends ActiveRecord
      */
     public function getToRegion()
     {
-        return $this->hasOne(Region::className(), ['id' => 'to_region_id']);
+        return $this->hasOne(Region::class, ['id' => 'to_region_id']);
     }
 
     /**
@@ -890,7 +890,7 @@ class Waybill extends ActiveRecord
      */
     public function getBranch()
     {
-        return $this->hasOne(Branch::className(), ['id' => 'current_branch_id']);
+        return $this->hasOne(Branch::class, ['id' => 'current_branch_id']);
     }
 
     /**
@@ -898,7 +898,7 @@ class Waybill extends ActiveRecord
      */
     public function getToCity()
     {
-        return $this->hasOne(City::className(), ['id' => 'to_city_id']);
+        return $this->hasOne(City::class, ['id' => 'to_city_id']);
     }
 
     /**
@@ -906,7 +906,7 @@ class Waybill extends ActiveRecord
      */
     public function getFromClient()
     {
-        return $this->hasOne(Client::className(), ['id' => 'from_client_id']);
+        return $this->hasOne(Client::class, ['id' => 'from_client_id']);
     }
 
     /**
@@ -914,7 +914,7 @@ class Waybill extends ActiveRecord
      */
     public function getToClient()
     {
-        return $this->hasOne(Client::className(), ['id' => 'to_client_id']);
+        return $this->hasOne(Client::class, ['id' => 'to_client_id']);
     }
 
 
@@ -923,7 +923,7 @@ class Waybill extends ActiveRecord
      */
     public function getDeliveryCourier()
     {
-        return $this->hasOne(User::className(), ['id' => 'delivery_courier_id']);
+        return $this->hasOne(User::class, ['id' => 'delivery_courier_id']);
     }
 
     /**
@@ -931,6 +931,6 @@ class Waybill extends ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(Status::className(), ['id' => 'status']);
+        return $this->hasOne(Status::class, ['id' => 'status']);
     }
 }

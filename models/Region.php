@@ -36,7 +36,7 @@ class Region extends ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     // ActiveRecord::EVENT_BEFORE_UPDATE => ['updated'],
@@ -80,7 +80,7 @@ class Region extends ActiveRecord
      */
     public function getCities()
     {
-        return $this->hasMany(City::className(), ['region_id' => 'id']);
+        return $this->hasMany(City::class, ['region_id' => 'id']);
     }
 
     /**
@@ -88,7 +88,7 @@ class Region extends ActiveRecord
      */
     public function getBranches()
     {
-        return $this->hasMany(Branch::className(), ['region_id' => 'id']);
+        return $this->hasMany(Branch::class, ['region_id' => 'id']);
     }
 
     public static function _all()

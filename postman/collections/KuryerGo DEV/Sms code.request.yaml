@@ -1,5 +1,5 @@
 $kind: http-request
-url: https://devapi.aktivexpress.uz/login
+url: http://localhost:8080/login
 method: POST
 body:
   type: formdata

@@ -28,7 +28,7 @@ class AcceptDeliveryForm extends Model
     {
         return [
             [['barcode'], 'required', 'message' => 'Barcode is requied.'],
-            [['barcode'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::className(), 'targetAttribute' => ['barcode' => 'barcode'], 'message' => 'Barcode not found.'],
+            [['barcode'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::class, 'targetAttribute' => ['barcode' => 'barcode'], 'message' => 'Barcode not found.'],
         ];
     }
 

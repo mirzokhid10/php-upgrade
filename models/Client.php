@@ -49,7 +49,7 @@ class Client extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className()
+                'class' => TimestampBehavior::class
             ]
         ];
     }
@@ -66,8 +66,8 @@ class Client extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['name',  'phone_number', 'contact_number', 'other_number', 'bank_name', 'director_fullname'], 'string', 'max' => 255],
             [['inn'], 'unique'],
-            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
-            [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
+            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
+            [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::class, 'targetAttribute' => ['region_id' => 'id']],
         ];
     }
 
@@ -108,7 +108,7 @@ class Client extends \yii\db\ActiveRecord
      */
     public function getCity()
     {
-        return $this->hasOne(City::className(), ['id' => 'city_id']);
+        return $this->hasOne(City::class, ['id' => 'city_id']);
     }
 
     /**
@@ -116,7 +116,7 @@ class Client extends \yii\db\ActiveRecord
      */
     public function getRegion()
     {
-        return $this->hasOne(Region::className(), ['id' => 'region_id']);
+        return $this->hasOne(Region::class, ['id' => 'region_id']);
     }
 
     public static function _all()
@@ -133,22 +133,22 @@ class Client extends \yii\db\ActiveRecord
 
     public function getPrices()
     {
-        return $this->hasMany(Prices::className(), ['client_id' => 'id']);
+        return $this->hasMany(Prices::class, ['client_id' => 'id']);
     }
 
     public function getContracts()
     {
-        return $this->hasMany(Contracts::className(), ['client_id' => 'id']);
+        return $this->hasMany(Contracts::class, ['client_id' => 'id']);
     }
 
     public function getActiveContract()
     {
-        return $this->hasOne(Contracts::className(), ['id' => 'contract_id']);
+        return $this->hasOne(Contracts::class, ['id' => 'contract_id']);
     }
 
     public function getActivePlan()
     {
-        return $this->hasOne(Plan::className(), ['id' => 'plan_id']);
+        return $this->hasOne(Plan::class, ['id' => 'plan_id']);
     }
 
     /**

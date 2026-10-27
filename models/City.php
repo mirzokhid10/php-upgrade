@@ -36,7 +36,7 @@ class City extends ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     // ActiveRecord::EVENT_BEFORE_UPDATE => ['updated'],
@@ -55,7 +55,7 @@ class City extends ActiveRecord
         return [
             [['region_id', 'c_order', 'ns11_code', 'soato'], 'integer'],
             [['name_uz', 'name_ru', 'name_en'], 'string', 'max' => 100],
-            [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
+            [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::class, 'targetAttribute' => ['region_id' => 'id']],
         ];
     }
 
@@ -81,7 +81,7 @@ class City extends ActiveRecord
      */
     public function getRegion()
     {
-        return $this->hasOne(Region::className(), ['id' => 'region_id']);
+        return $this->hasOne(Region::class, ['id' => 'region_id']);
     }
 
     public static function _all($region_id = null, $group_by = false)

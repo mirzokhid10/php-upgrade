@@ -1,8 +1,0 @@
-$kind: http-request
-name: profile
-url: http://localhost:8000/api/v1/users/me/
-method: PATCH
-body:
-  type: json
-  content: '{"full_name": "New Name"}'
-order: 1919

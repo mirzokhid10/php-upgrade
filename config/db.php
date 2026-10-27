@@ -4,10 +4,10 @@ $db_local = require __DIR__ . '/db_local.php';
 
 $default = [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=aktivexpressdb',
+    'dsn' => 'mysql:host=localhost;dbname=aktivexpress_testdb',
     'username' => 'root',
-    'password' => '',
-    'charset' => 'utf8',
+    'password' => '9506',
+    'charset' => 'utf8mb4',
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,

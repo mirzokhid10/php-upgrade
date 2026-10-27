@@ -70,18 +70,24 @@ class WaybillController extends Controller
 		];
 
 		if (isset($post['is_external_key']) && $post['is_external_key']) {
-			$waybill_id = Yii::$app->db->createCommand("SELECT waybill_id FROM client_external_keys WHERE external_id = " . $post['barcode'] . " ORDER BY id DESC")->queryScalar();
-			if ($waybill_id) {
-				$condition = [
-					'id' => $waybill_id
-				];
-			} else {
-				return [
-					'message' => 'External key not found',
-					'code' => 404
-				];
-			}
-		}
+            if (empty($post['barcode']) || !is_scalar($post['barcode'])) {
+                return ['message' => 'barcode is required', 'code' => 400];
+            }
+        
+            $waybill_id = (new \yii\db\Query())
+                ->select('waybill_id')
+                ->from('client_external_keys')
+                ->where(['external_id' => $post['barcode']])
+                ->orderBy(['id' => SORT_DESC])
+                ->scalar();
+        
+            if ($waybill_id) {
+                $condition = ['id' => $waybill_id];
+            } else {
+                return ['message' => 'External key not found', 'code' => 404];
+            }
+        }
+		
 
 		$model = Waybill::find()->with(['fromBranch', 'toBranch', 'fromRegion', 'toRegion', 'fromCity', 'toCity', 'status'])->where($condition)->asArray()->one();
 		if (!$model) {
@@ -130,19 +136,24 @@ class WaybillController extends Controller
 			'barcode' => $post['barcode']
 		];
 
-		if (isset($post['is_external_key']) && $post['is_external_key']) {
-			$waybill_id = Yii::$app->db->createCommand("SELECT waybill_id FROM client_external_keys WHERE external_id = " . $post['barcode'] . " ORDER by id DESC")->queryScalar();
-			if ($waybill_id) {
-				$condition = [
-					'id' => $waybill_id
-				];
-			} else {
-				return [
-					'message' => 'External key not found',
-					'code' => 404
-				];
-			}
-		}
+        if (isset($post['is_external_key']) && $post['is_external_key']) {
+            if (empty($post['barcode']) || !is_scalar($post['barcode'])) {
+                return ['message' => 'barcode is required', 'code' => 400];
+            }
+        
+            $waybill_id = (new \yii\db\Query())
+                ->select('waybill_id')
+                ->from('client_external_keys')
+                ->where(['external_id' => $post['barcode']])
+                ->orderBy(['id' => SORT_DESC])
+                ->scalar();
+        
+            if ($waybill_id) {
+                $condition = ['id' => $waybill_id];
+            } else {
+                return ['message' => 'External key not found', 'code' => 404];
+            }
+        }
 
 		if ($user->client_id !== 653) {
 			$condition['from_client_id'] = $user->client_id;
@@ -446,8 +457,9 @@ class WaybillController extends Controller
 						$history->save(false);
 
 						if (in_array($identity->id, [812])) {
-							Yii::$app->smscomponent->send($model->id, '998909984031', 'ZAYAVKA. TERMINAL Hamkor Bank shtrix kod:' . $model->barcode, true);
-							Yii::$app->smscomponent->send($model->id, '998994443960', 'ZAYAVKA. TERMINAL Hamkor Bank shtrix kod:' . $model->barcode, true);
+                            Yii::$app->smscomponent->send('998909984031', 'ZAYAVKA. TERMINAL Hamkor Bank shtrix kod:' . $model->barcode, $model->id, true);
+                            Yii::$app->smscomponent->send('998994443960', 'ZAYAVKA. TERMINAL Hamkor Bank shtrix kod:' . $model->barcode, $model->id, true);
+
 						}
 
 						return [

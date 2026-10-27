@@ -36,8 +36,8 @@ class HistoryData extends ActiveRecord
         return [
             [['history_id', 'waybill_id', 'created_at', 'updated_at'], 'integer'],
             [['column_name', 'old_val', 'new_val'], 'string', 'max' => 255],
-            [['history_id'], 'exist', 'skipOnError' => true, 'targetClass' => History::className(), 'targetAttribute' => ['history_id' => 'id']],
-            [['waybill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::className(), 'targetAttribute' => ['waybill_id' => 'id']]
+            [['history_id'], 'exist', 'skipOnError' => true, 'targetClass' => History::class, 'targetAttribute' => ['history_id' => 'id']],
+            [['waybill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::class, 'targetAttribute' => ['waybill_id' => 'id']]
         ];
     }
 
@@ -61,7 +61,7 @@ class HistoryData extends ActiveRecord
      */
     public function getHistory()
     {
-        return $this->hasOne(History::className(), ['id' => 'history_id']);
+        return $this->hasOne(History::class, ['id' => 'history_id']);
     }
 
     /**
@@ -69,6 +69,6 @@ class HistoryData extends ActiveRecord
      */
     public function getWaybill()
     {
-        return $this->hasOne(Waybill::className(), ['id' => 'waybill_id']);
+        return $this->hasOne(Waybill::class, ['id' => 'waybill_id']);
     }
 }

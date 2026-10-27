@@ -56,26 +56,27 @@ class NotificationForm extends Model
             if ($waybill) {
                 if (in_array($waybill->from_city_id, [199,135,126,124])) {
                     // Yii::$app->smscomponent->send($wid, '998999993194', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
-                    Yii::$app->smscomponent->send($wid, '998994443911', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
+                    Yii::$app->smscomponent->send('998994443911', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, $wid, true);
+
                 }
                 if ($waybill->from_city_id == 178) {
-                    Yii::$app->smscomponent->send($wid, '998994443902', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
+                    Yii::$app->smscomponent->send('998994443902', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, $wid, true);
                 }
                 if ($waybill->from_city_id == 180) {
-                    Yii::$app->smscomponent->send($wid, '998994443901', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
+                    Yii::$app->smscomponent->send('998994443901', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, $wid, true);
                 }
                 if ($waybill->from_city_id == 184) {
-                    Yii::$app->smscomponent->send($wid, '998994443903', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
+                    Yii::$app->smscomponent->send('998994443903', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, $wid, true);
                 }
                 if ($waybill->from_city_id == 177) {
-                    Yii::$app->smscomponent->send($wid, '998994443906', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
+                    Yii::$app->smscomponent->send('998994443906', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, $wid, true);
                 }
                 if ($waybill->from_city_id == 179) {
-                    Yii::$app->smscomponent->send($wid, '998954443913', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
+                    Yii::$app->smscomponent->send('998954443913', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, $wid, true);
                 }
                 if ($waybill->from_region_id == 9) {
-                    Yii::$app->smscomponent->send($wid, '998910228484', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
-                    Yii::$app->smscomponent->send($wid, '998918018686', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
+                    Yii::$app->smscomponent->send('998910228484', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, $wid, true);
+                    Yii::$app->smscomponent->send('998918018686', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, $wid, true);
                 }
                 // Yii::$app->smscomponent->send($wid, '+998994448226', 'ZAYAVKA. Hamkor Bank plastik '.$from.': shtrix kod:'.$waybill->barcode, true);
                 $branch = Branch::findOne($waybill->from_branch_id);

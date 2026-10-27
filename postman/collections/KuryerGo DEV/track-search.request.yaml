@@ -1,6 +1,6 @@
 $kind: http-request
 name: track-search
-url: https://devapi.aktivexpress.uz/track-search?text=998900169506
+url: http://localhost:8080/track-search?text=998900169506
 method: GET
 queryParams:
   text: "998900169506"

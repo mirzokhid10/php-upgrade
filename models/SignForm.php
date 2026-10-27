@@ -35,7 +35,7 @@ class SignForm extends Model
             [['wid', 'full_name'], 'required'],
             [['latitude', 'longitude'], 'safe'],
             ['full_name', 'string', 'max' => 255],
-            [['wid'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::className(), 'targetAttribute' => ['wid' => 'id']],
+            [['wid'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::class, 'targetAttribute' => ['wid' => 'id']],
             ['sign', 'image', 'maxSize' => 2097152, 'extensions' => ['png']],
         ];
     }

@@ -1,5 +1,5 @@
 $kind: http-request
-url: https://devapi.aktivexpress.uz/waybill-accept-delivery
+url: http://localhost:8080/waybill-accept-delivery
 method: POST
 headers:
   Authorization: Bearer hDaOSFKVM5dAf-hw_2adDQv3TZhf5fL_61pDV_GL--XNZEhj2NPl5ttlDOcytYcX

@@ -95,7 +95,7 @@ class Prices extends \yii\db\ActiveRecord
     */
     public function getClient() 
     {
-        return $this->hasOne(Client::className(), ['id' => 'client_id']); 
+        return $this->hasOne(Client::class, ['id' => 'client_id']); 
     }
 
     /** 
@@ -103,7 +103,7 @@ class Prices extends \yii\db\ActiveRecord
     */
     public function getContract() 
     {
-        return $this->hasOne(Contract::className(), ['id' => 'contract_id']); 
+        return $this->hasOne(Contract::class, ['id' => 'contract_id']); 
     }
 
     /** 
@@ -111,6 +111,6 @@ class Prices extends \yii\db\ActiveRecord
     */
     public function getPlan() 
     {
-        return $this->hasOne(Plan::className(), ['id' => 'plan_id']); 
+        return $this->hasOne(Plan::class, ['id' => 'plan_id']); 
     }
 }

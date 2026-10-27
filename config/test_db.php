@@ -5,6 +5,6 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=aktivexpress_testdb',
     'username' => 'root',
-    'password' => '2402',
-    'charset' => 'utf8',
+    'password' => '9506',
+    'charset' => 'utf8mb4',
 ];

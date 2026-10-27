@@ -29,7 +29,7 @@ class CourierPickedForm extends Model
             [['barcode'], 'required'],
             [['timestamp'], 'integer', 'min' => 1000000000, 'max' => 9999999999],
             [['courier_id', 'timestamp'], 'safe'],
-            [['courier_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['courier_id' => 'id']],
+            [['courier_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['courier_id' => 'id']],
         ];
     }
 
@@ -38,7 +38,7 @@ class CourierPickedForm extends Model
         $user = Yii::$app->user->identity;
         $barcodes = [];
 
-        if (strpos($this->barcode, ',')) {
+        if (strpos($this->barcode ?? '', ',')) {
             $barcodes = explode(',', $this->barcode);
         } else {
             $barcodes = $this->barcode;

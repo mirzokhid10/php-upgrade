@@ -10,7 +10,7 @@ class ActiveController extends \yii\rest\ActiveController
 	{
 		$behaviors = parent::behaviors();
 		$behaviors['authenticator'] = [
-			'class' => HttpBearerAuth::className(),
+			'class' => HttpBearerAuth::class,
 		];
 		return $behaviors;
 	}

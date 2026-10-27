@@ -34,7 +34,7 @@ class UserAuthController extends \yii\web\Controller
 
         $user->sms_code = (string)random_int(10000, 99999);
         if ($user->save(false)) {
-            Yii::$app->smscomponent->send(NULL, $model->phone, 'Aktiv Express mobil ilovasiga kirishni tasdiqlash kodi-:' . $user->sms_code, 1);
+            Yii::$app->smscomponent->send($model->phone, 'Aktiv Express mobil ilovasiga kirishni tasdiqlash kodi-:' . $user->sms_code, null, 1);
             return [
                 'status' => 'OK',
                 'code' => 200,

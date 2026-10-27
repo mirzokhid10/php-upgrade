@@ -28,7 +28,7 @@ class SignupPhoneForm extends Model
     {
         return [
             [['phone'], 'required', 'message' => 'Phone number is requied.'],
-            // [['phone'], 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['phone' => 'username'], 'message' => 'Phone number not found.'],
+            // [['phone'], 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['phone' => 'username'], 'message' => 'Phone number not found.'],
         ];
     }
 

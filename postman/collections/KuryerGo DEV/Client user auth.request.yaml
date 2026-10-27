@@ -1,6 +1,6 @@
 $kind: http-request
 name: Client user auth
-url: https://devapi.aktivexpress.uz/user-auth/signup-phone?phone=998900169506
+url: http://localhost:8080/user-auth/signup-phone?phone=998900169506
 method: POST
 queryParams:
   phone: "998900169506"

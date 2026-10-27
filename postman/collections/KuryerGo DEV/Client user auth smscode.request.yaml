@@ -1,5 +1,5 @@
 $kind: http-request
-url: https://devapi.aktivexpress.uz/auth-signup-code
+url: http://localhost:8080/auth-signup-code
 method: POST
 body:
   type: formdata

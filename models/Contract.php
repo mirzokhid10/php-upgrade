@@ -37,7 +37,7 @@ class Contract extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className()
+                'class' => TimestampBehavior::class
             ]
         ];
     }
@@ -51,7 +51,7 @@ class Contract extends \yii\db\ActiveRecord
             [['region_id', 'city_id', 'contract_order', 'client_id', 'has_contract', 'created_at', 'updated_at'], 'integer'],
             [['date'], 'safe'],
             [['number'], 'string', 'max' => 255],
-            [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['client_id' => 'id']],
+            [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'id']],
         ];
     }
 
@@ -79,7 +79,7 @@ class Contract extends \yii\db\ActiveRecord
      */
     public function getClient()
     {
-        return $this->hasOne(Client::className(), ['id' => 'client_id']);
+        return $this->hasOne(Client::class, ['id' => 'client_id']);
     }
 
     /**
@@ -87,6 +87,6 @@ class Contract extends \yii\db\ActiveRecord
      */
     public function getRegion()
     {
-        return $this->hasOne(Region::className(), ['id' => 'region_id']);
+        return $this->hasOne(Region::class, ['id' => 'region_id']);
     }
 }

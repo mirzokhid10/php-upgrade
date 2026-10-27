@@ -15,7 +15,7 @@ class Controller extends \yii\rest\Controller
 	{
 		$behaviors = parent::behaviors();
 		$behaviors['authenticator'] = [
-			'class' => HttpBearerAuth::className(),
+			'class' => HttpBearerAuth::class,
 		];
 		return $behaviors;
 	}

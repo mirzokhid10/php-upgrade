@@ -28,7 +28,7 @@ class CallingCourierRequest extends ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
@@ -43,7 +43,7 @@ class CallingCourierRequest extends ActiveRecord
             [['latitude'], 'number', 'min' => -90, 'max' => 90],
             [['longitude'], 'number', 'min' => -180, 'max' => 180],
             [['latitude'], 'validateCoordinatesPair'],
-            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::className(), 'targetAttribute' => ['city_id' => 'id']],
+            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
         ];
     }
 
@@ -85,7 +85,7 @@ class CallingCourierRequest extends ActiveRecord
      */
     public function getCity()
     {
-        return $this->hasOne(City::className(), ['id' => 'city_id']);
+        return $this->hasOne(City::class, ['id' => 'city_id']);
     }
 
     /**
@@ -93,7 +93,7 @@ class CallingCourierRequest extends ActiveRecord
      */
     public function getRegion()
     {
-        return $this->hasOne(Region::className(), ['id' => 'region_id']);
+        return $this->hasOne(Region::class, ['id' => 'region_id']);
     }
 
     /**

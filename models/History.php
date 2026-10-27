@@ -35,7 +35,7 @@ class History extends ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className()
+                'class' => TimestampBehavior::class
             ]
         ];
     }
@@ -48,7 +48,7 @@ class History extends ActiveRecord
         return [
             [['waybill_id', 'user_id', 'created_at', 'updated_at'], 'integer'],
             [['message_uz', 'message_en', 'message_ru'], 'string'],
-            [['waybill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::className(), 'targetAttribute' => ['waybill_id' => 'id']],
+            [['waybill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::class, 'targetAttribute' => ['waybill_id' => 'id']],
         ];
     }
 
@@ -74,7 +74,7 @@ class History extends ActiveRecord
      */
     public function getWaybill()
     {
-        return $this->hasOne(Waybill::className(), ['id' => 'waybill_id']);
+        return $this->hasOne(Waybill::class, ['id' => 'waybill_id']);
     }
 
     /**
@@ -82,7 +82,7 @@ class History extends ActiveRecord
      */
     public function getHistoryDatas()
     {
-        return $this->hasMany(HistoryData::className(), ['history_id' => 'id']);
+        return $this->hasMany(HistoryData::class, ['history_id' => 'id']);
     }
 
     /**
@@ -90,7 +90,7 @@ class History extends ActiveRecord
      */
     public function getData()
     {
-        return $this->hasMany(HistoryData::className(), ['history_id' => 'id']);
+        return $this->hasMany(HistoryData::class, ['history_id' => 'id']);
     }
 
     public static function createNew($waybill)

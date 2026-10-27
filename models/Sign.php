@@ -38,7 +38,7 @@ class Sign extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
@@ -51,7 +51,7 @@ class Sign extends \yii\db\ActiveRecord
             [['user_id', 'waybill_id', 'is_delivery', 'created_at', 'updated_at', 'datetime'], 'integer'],
             [['full_name', 'latitude', 'longitude', 'barcode'], 'string', 'max' => 255],
             [['wids', 'barcodes', 'msg'], 'string'],
-            [['waybill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::className(), 'targetAttribute' => ['waybill_id' => 'id']],
+            [['waybill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Waybill::class, 'targetAttribute' => ['waybill_id' => 'id']],
             ['sign_file', 'image', 'extensions' => ['png']],
             ['photo', 'image'],
         ];
@@ -204,7 +204,8 @@ class Sign extends \yii\db\ActiveRecord
                                         if (strlen($message) >= 126) {
                                             $message = "AKTIV: Uvajayemiy klient, Vasha pochta kod " . $waybill->barcode . " dostavlen/Pochtangiz ". $to_name ." ga yetkazildi.";
                                         }
-                                        Yii::$app->smscomponent->send($waybill->id, $from_phone_number, $message);
+                                        Yii::$app->smscomponent->send($from_phone_number, $message, $waybill->id);
+
                                     }
                                 }
                             }
@@ -338,7 +339,7 @@ class Sign extends \yii\db\ActiveRecord
                                         if (strlen($message) >= 126) {
                                             $message = "AKTIV: Uvajayemiy klient, Vasha pochta kod " . $waybill->barcode . " dostavlen/Pochtangiz ". $to_name ." ga yetkazildi.";
                                         }
-                                        Yii::$app->smscomponent->send($waybill->id, $from_phone_number, $message);
+                                        Yii::$app->smscomponent->send($from_phone_number, $message, $waybill->id);
                                     }
                                 }
                             }

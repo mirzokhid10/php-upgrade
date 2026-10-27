@@ -8,7 +8,7 @@ use yii\base\Component;
 
 class SmsComponent extends Component
 {
-    public function send($waybill_id = null, $phone, $text, $is_call_center = null)
+    public function send($phone, $text, $waybill_id = null, $is_call_center = null)
     {
         $expr = '/^[a-z][A-Z][0-9]*$/';
 

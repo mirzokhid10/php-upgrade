@@ -1,6 +1,6 @@
 $kind: http-request
 name: calling courier
-url: https://devapi.aktivexpress.uz/calling-courier
+url: http://localhost:8080/calling-courier
 method: POST
 body:
   type: json

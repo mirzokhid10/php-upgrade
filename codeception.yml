@@ -10,3 +10,7 @@ actor_suffix: Tester
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+        - Tests\Support\Extension\ShowFailure
+settings:
+    error_level: E_ALL
+    

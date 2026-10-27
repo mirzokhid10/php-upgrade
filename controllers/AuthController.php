@@ -76,7 +76,8 @@ class AuthController extends \yii\rest\Controller
 			$user->sms_code = random_int(10000, 99999);
 			$user->save(false);
 
-			Yii::$app->smscomponent->send(NULL, $model->phone, 'KuryerGo mobil ilovasiga kirishni tasdiqlash kodi-'.$user->sms_code, 1);
+			Yii::$app->smscomponent->send($model->phone, 'KuryerGo mobil ilovasiga kirishni tasdiqlash kodi-'.$user->sms_code, null, 1);
+
 
 			return $result;
 		}
