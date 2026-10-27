@@ -310,6 +310,47 @@ class AuthCest
     }
 
     /**
+     * A blocked/inactive user must not be able to log in, even with a valid code
+     * (User::findOne() without a status condition would let them through).
+     */
+    #[Group('security-bug')]
+    public function signupCodeRejectsInactiveUserWithValidCode(ApiTester $I): void
+    {
+        $this->createUser($I, ['status' => User::STATUS_INACTIVE, 'sms_code' => 12345]);
+
+        $I->sendPost('/auth-signup-code', ['phone' => self::PHONE, 'code' => 12345]);
+
+        $I->seeResponseContainsJson(['status' => 'ERROR']);
+        $this->assertNoToken($I);
+    }
+
+    /**
+     * A user with NO pending code has sms_code = NULL. A missing/empty code must never match it
+     * (findOne(['sms_code' => null]) would translate to "sms_code IS NULL").
+     */
+    public function signupCodeRejectsEmptyCodeWhenNoCodeIsPending(ApiTester $I): void
+    {
+        $this->createUser($I); // sms_code stays NULL
+
+        foreach ([[], ['code' => '']] as $extra) {
+            $I->sendPost('/auth-signup-code', array_merge(['phone' => self::PHONE], $extra));
+            $I->seeResponseContainsJson(['status' => 'ERROR']);
+            $this->assertNoToken($I);
+        }
+    }
+
+    public function signupCodeRejectsNullCodeInJsonBody(ApiTester $I): void
+    {
+        $this->createUser($I); // sms_code stays NULL
+
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendPost('/auth-signup-code', json_encode(['phone' => self::PHONE, 'code' => null]));
+
+        $I->seeResponseContainsJson(['status' => 'ERROR']);
+        $this->assertNoToken($I);
+    }
+
+    /**
      * SECURITY: this test is EXPECTED TO FAIL against the current code.
      * SignupCodeForm checks that the phone exists AND that the code exists in ANY user's
      * `sms_code` -- it never checks that the code belongs to THAT phone's user. So anyone who

@@ -45,8 +45,7 @@ class UserAuthController extends \yii\web\Controller
 
         return ['status' => 'ERROR', 'message' => 'Failed to save user.'];
     }
-
-
+    
     public function actionSignupCode()
     {
         $post = Yii::$app->request->post();

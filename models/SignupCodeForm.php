@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
+use yii\helpers\FileHelper;
 
 
 /**
@@ -55,7 +57,8 @@ class SignupCodeForm extends Model
         if ($this->_user === false) {
             $this->_user = User::findOne([
                 'username' => $this->phone,
-                'sms_code' => $this->code   
+                'sms_code' => $this->code,
+                'status'   => User::STATUS_ACTIVE,
             ]);
         }
 
