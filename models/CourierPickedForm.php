@@ -36,9 +36,14 @@ class CourierPickedForm extends Model
     public function changeStatus()
     {
         $user = Yii::$app->user->identity;
+        if (!$user->client_id) {
+            $this->error_message = 'This API for legal client';
+            return false;
+        }
         $barcodes = [];
 
-        if (strpos($this->barcode ?? '', ',')) {
+        // if (strpos($this->barcode ?? '', ',')) {
+        if (strpos((string) $this->barcode, ',')) {
             $barcodes = explode(',', $this->barcode);
         } else {
             $barcodes = $this->barcode;
@@ -53,9 +58,11 @@ class CourierPickedForm extends Model
 
         if (count($waybills)) {
             if ($this->courier_id) {
-                Waybill::updateAll(['status' => 3, 'pickup_datetime' => $timestamp, 'pickup_courier_id' => $this->courier_id], ['barcode' => $barcodes]);
+                // Waybill::updateAll(['status' => 3, 'pickup_datetime' => $timestamp, 'pickup_courier_id' => $this->courier_id], ['barcode' => $barcodes]);
+                Waybill::updateAll(['status' => 3, 'pickup_datetime' => $timestamp, 'pickup_courier_id' => $this->courier_id], ['barcode' => $barcodes, 'from_client_id' => $user->client_id]);
             } else {
-                Waybill::updateAll(['status' => 3, 'pickup_datetime' => $timestamp], ['barcode' => $barcodes]);
+                // Waybill::updateAll(['status' => 3, 'pickup_datetime' => $timestamp], ['barcode' => $barcodes]);
+                Waybill::updateAll(['status' => 3, 'pickup_datetime' => $timestamp], ['barcode' => $barcodes, 'from_client_id' => $user->client_id]);
             }
             return true;
         } else {

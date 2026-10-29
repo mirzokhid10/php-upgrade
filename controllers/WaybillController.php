@@ -58,9 +58,10 @@ class WaybillController extends Controller
 
 		$waybill_id = null;
 
-		if (!isset($post['barcode']) && strlen($post['barcode']) < 10) {
+		// if (!isset($post['barcode']) && strlen($post['barcode']) < 10) {
+		if (!isset($post['barcode']) || !is_scalar($post['barcode'])) {
 			return [
-				'message' => 'Barcode is to small',
+				'message' => 'Barcode is too small',
 				'code' => 404
 			];
 		}
@@ -125,9 +126,10 @@ class WaybillController extends Controller
 
 		$waybill_id = null;
 
-		if (!isset($post['barcode']) && strlen($post['barcode']) < 10) {
+		// if (!isset($post['barcode']) && strlen($post['barcode']) < 10) {
+		if (!isset($post['barcode']) || !is_scalar($post['barcode'])) {
 			return [
-				'message' => 'Barcode is to small',
+				'message' => 'Barcode is too small',
 				'code' => 404
 			];
 		}
@@ -274,8 +276,10 @@ class WaybillController extends Controller
 		];
 	}
 
-	public function actionComment()
+		public function actionComment()
 	{
+		$this->user(); 
+
 		$post = Yii::$app->request->post();
 
 		$waybill = NULL;
@@ -295,9 +299,9 @@ class WaybillController extends Controller
 				'wrong_address' => "Manzil noto",
 			];
 
-			$comment = $post['comment'];
+			$comment = $post['comment'] ?? null;
 
-			if (in_array($comment, array_keys($comments))) {
+			if (in_array($comment, array_keys($comments), true)) {
 				$result = [
 					'id' => $waybill->id,
 					'barcode' => $waybill->barcode,
@@ -681,6 +685,7 @@ class WaybillController extends Controller
 
 	public function actionDelivered()
 	{
+		$this->user(); // couriers only: answers 403 to everybody else
 		$error_msg = '';
 		$post = Yii::$app->request->post();
 		$model = new Sign();
@@ -719,13 +724,23 @@ class WaybillController extends Controller
 	{
 		$post = Yii::$app->request->queryParams;
 
-		Waybill::updateAll(['status' => 57], ['id' => $post['wid']]);
+		if (!isset($post['wid'])) {
+			throw new BadRequestHttpException('wid is required');
+		}
+
+		$user = Yii::$app->user->identity;
+		if (!$user->client_id) {
+			throw new ForbiddenHttpException('This API for legal client');
+		}
+
+		Waybill::updateAll(['status' => 57], ['id' => $post['wid'], 'from_client_id' => $user->client_id]);
 
 		return ['status' => $post['wid']];
 	}
 
 	public function actionPicked()
 	{
+		$this->user(); // couriers only: answers 403 to everybody else
 		$post = Yii::$app->request->post();
 		$model = new Sign();
 		$model->setAttributes($post);
@@ -764,6 +779,7 @@ class WaybillController extends Controller
 
 	public function actionAccept()
 	{
+		$this->user(); // couriers only: answers 403 to everybody else
 		$post = Yii::$app->request->post();
 		$model = new AcceptForm();
 		$model->setAttributes($post);
@@ -777,6 +793,7 @@ class WaybillController extends Controller
 
 	public function actionAcceptDelivery()
 	{
+		$this->user(); // couriers only: answers 403 to everybody else
 		$post = Yii::$app->request->post();
 		$model = new AcceptDeliveryForm();
 		$model->setAttributes($post);

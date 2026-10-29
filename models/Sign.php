@@ -199,7 +199,9 @@ class Sign extends \yii\db\ActiveRecord
                                             $to_name .= "(".$region->short_name.")";
                                         }
                                         $from_phone_number = $waybill->from_phone_number;
-                                        $from_phone_number = str_replace(' ', '', $from_phone_number);
+                                        // $from_phone_number = str_replace(' ', '', $from_phone_number);
+                                        $from_phone_number = str_replace(' ', '', (string) $from_phone_number);
+                                        
                                         $message = "AKTIV: Uvajayemiy klient, Vasha pochta kod " . $waybill->barcode . " dostavlen/Hurmatli mijoz, pochtangiz ". $to_name ." ga yetkazildi.";
                                         if (strlen($message) >= 126) {
                                             $message = "AKTIV: Uvajayemiy klient, Vasha pochta kod " . $waybill->barcode . " dostavlen/Pochtangiz ". $to_name ." ga yetkazildi.";
@@ -334,7 +336,9 @@ class Sign extends \yii\db\ActiveRecord
                                             $to_name .= "(".$region->short_name.")";
                                         }
                                         $from_phone_number = $waybill->from_phone_number;
-                                        $from_phone_number = str_replace(' ', '', $from_phone_number);
+                                        // $from_phone_number = str_replace(' ', '', $from_phone_number);
+                                        $from_phone_number = str_replace(' ', '', (string) $from_phone_number);
+                                        
                                         $message = "AKTIV: Uvajayemiy klient, Vasha pochta kod " . $waybill->barcode . " dostavlen/Hurmatli mijoz, pochtangiz ". $to_name ." ga yetkazildi.";
                                         if (strlen($message) >= 126) {
                                             $message = "AKTIV: Uvajayemiy klient, Vasha pochta kod " . $waybill->barcode . " dostavlen/Pochtangiz ". $to_name ." ga yetkazildi.";

@@ -43,6 +43,9 @@ class ResourceController extends Controller
 	{
 		$query = new Query;
 		$result = $query->select('*')->from('clients')->all();
+		$result = $query->select(['id', 'name', 'address', 'phone_number'])
+			->from('clients')
+			->all();
 
 		return $result;
 	}

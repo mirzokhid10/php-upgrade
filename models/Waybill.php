@@ -468,8 +468,10 @@ class Waybill extends ActiveRecord
             $this->cod_percent_amount = ($this->cod_amount * $percent) / 100;
         }
 
-        $from_phone = str_replace(' ', '', $this->from_phone_number);
-        $to_phone = str_replace(' ', '', $this->to_phone_number);
+        // $from_phone = str_replace(' ', '', $this->from_phone_number);
+        // $to_phone = str_replace(' ', '', $this->to_phone_number);
+        $from_phone = str_replace(' ', '', (string) $this->from_phone_number);
+        $to_phone = str_replace(' ', '', (string) $this->to_phone_number);
 
         $searchable_data = $this->barcode . ' ' . $this->from_fullname . ' ' . $from_phone . ' ' . $this->from_address . ' ' . $this->from_comment . ' ' . $this->to_fullname . ' ' . $to_phone . ' ' . $this->to_address . ' ' . $this->to_comment;
         if ($this->from_client_id) {
@@ -481,7 +483,8 @@ class Waybill extends ActiveRecord
         }
         $this->searchable_data = $searchable_data;
 
-        if (strlen($this->to_phone_number ?? '') == 9) {
+        // if (strlen($this->to_phone_number ?? '') == 9) {
+        if (strlen((string) $this->to_phone_number) == 9) {
             if (preg_match('/(\d{2})(\d{3})(\d{2})(\d{2})$/', $this->to_phone_number, $matches)) {
                 $this->to_phone_number = '+998' . $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4];
             }

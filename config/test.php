@@ -31,5 +31,6 @@ return ArrayHelper::merge($webConfig, [
             'enableCsrfValidation' => false,
         ],
     ],
-    'params' => $params,
+    // 'params' => $params,
+    'params' => array_merge($params, ['sign_dir' => sys_get_temp_dir() . '/aktiv-test-signs/']),
 ]);

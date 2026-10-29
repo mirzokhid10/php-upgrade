@@ -61,8 +61,10 @@ class Individuals extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        $this->phone_number = str_replace(' ', '', $this->phone_number);
-        $this->phone_number_other = str_replace(' ', '', $this->phone_number_other);
+        // $this->phone_number = str_replace(' ', '', $this->phone_number);
+        $this->phone_number = str_replace(' ', '', (string) $this->phone_number);
+        // $this->phone_number_other = str_replace(' ', '', $this->phone_number_other);
+        $this->phone_number_other = str_replace(' ', '', (string) $this->phone_number_other);
         return parent::beforeSave($insert);
     }
 }
