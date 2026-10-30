@@ -46,3 +46,8 @@ theme.zip
 
 #ignore sign files
 web/files
+*.sql
+config/*_local.php
+
+*.sql
+config/*_local.php

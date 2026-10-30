@@ -21,14 +21,14 @@
         "yiisoft/yii2-symfonymailer": "^4.0"
     },
     "require-dev": {
-        "yiisoft/yii2-debug": "^2.1",
-        "yiisoft/yii2-gii": "~2.2.5",
-        "yiisoft/yii2-faker": "~2.0.0",
         "codeception/codeception": "^5.3",
         "codeception/module-asserts": "^3.0",
-        "codeception/module-phpbrowser": "^4.0",
+        "codeception/module-phpbrowser": "^4.1",
         "codeception/module-rest": "^3.0",
-        "codeception/module-yii2": "^1.1"
+        "codeception/module-yii2": "^1.1",
+        "yiisoft/yii2-debug": "^2.1",
+        "yiisoft/yii2-faker": "~2.0.0",
+        "yiisoft/yii2-gii": "~2.2.5"
     },
     "config": {
         "process-timeout": 1800,

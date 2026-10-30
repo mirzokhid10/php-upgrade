@@ -84,12 +84,13 @@ class CallingCourierController extends Controller
             $model->setAttributes(Yii::$app->request->post());
 
             if (!$model->validate()) {
-                $firstErrors = reset($model->errors);
-
+                $errors = $model->getErrors();
+                $firstErrors = reset($errors);
+            
                 return [
                     'success' => false,
                     'message' => $firstErrors ? $firstErrors[0] : null,
-                    'errors' => $model->errors,
+                    'errors' => $errors,
                 ];
             }
 

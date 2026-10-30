@@ -38,11 +38,11 @@ class CallingCourierRequest extends ActiveRecord
         return [
             [['city_id', 'phone'], 'required'],
             [['city_id'], 'integer'],
-            [['phone'], 'match', 'pattern' => '/^998\d{9}$/', 'message' => 'Phone number format is invalid.'],
+            [['phone'], 'match', 'pattern' => '/^998\d{9}\z/', 'message' => 'Phone number format is invalid.'],
             [['address'], 'string', 'max' => 255],
             [['latitude'], 'number', 'min' => -90, 'max' => 90],
             [['longitude'], 'number', 'min' => -180, 'max' => 180],
-            [['latitude'], 'validateCoordinatesPair'],
+            [['latitude'], 'validateCoordinatesPair', 'skipOnEmpty' => false],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
         ];
     }
@@ -94,6 +94,7 @@ class CallingCourierRequest extends ActiveRecord
     public function getRegion()
     {
         return $this->hasOne(Region::class, ['id' => 'region_id']);
+        
     }
 
     /**
