@@ -23,7 +23,7 @@ trait CreatesUsers
      * Inserts a user directly into the TEST database and returns its id.
      * Required columns that are not given (e.g. `email`) are filled from the table schema.
      */
-    private function createUser(ApiTester $I, array $overrides = []): int
+    private function createUser(ApiTester|UnitTester $I, array $overrides = []): int
     {
         $attributes = array_merge([
             'username' => self::PHONE,

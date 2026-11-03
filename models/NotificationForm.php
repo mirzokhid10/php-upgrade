@@ -85,11 +85,14 @@ class NotificationForm extends Model
                     $ph = str_replace('+', '', $ph);
                     if ($waybill->from_branch_id !== 15) {
                         if (!in_array($waybill->from_city_id, [199,135,126,124])) {
-                            Yii::$app->smscomponent->send($wid, $ph, 'ZAYAVKA. Hamkor Bank plastik '.$from. ' shtrix kod:'.$waybill->barcode, true);
+                            // Yii::$app->smscomponent->send($wid, $ph, 'ZAYAVKA. Hamkor Bank plastik '.$from. ' shtrix kod:'.$waybill->barcode, true);
+                            Yii::$app->smscomponent->send($ph, 'ZAYAVKA. Hamkor Bank plastik '.$from.' shtrix kod:'.$waybill->barcode, $wid, true);
+
                         }
                     }
                     if ($waybill->from_branch_id == 14) {
-                        Yii::$app->smscomponent->send($wid, '998994443990', 'ZAYAVKA. Hamkor Bank plastik '.$from. ' shtrix kod:'.$waybill->barcode, true);
+                        // Yii::$app->smscomponent->send($wid, '998994443990', 'ZAYAVKA. Hamkor Bank plastik '.$from. ' shtrix kod:'.$waybill->barcode, true);
+                        Yii::$app->smscomponent->send('998994443990', 'ZAYAVKA. Hamkor Bank plastik '.$from.' shtrix kod:'.$waybill->barcode, $wid, true);
                     }
                 }
             }
