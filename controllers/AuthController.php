@@ -76,7 +76,8 @@ class AuthController extends \yii\rest\Controller
 			$user->sms_code = random_int(10000, 99999);
 			$user->save(false);
 
-			Yii::$app->smscomponent->send(NULL, $model->phone, 'KuryerGo mobil ilovasiga kirishni tasdiqlash kodi-'.$user->sms_code, 1);
+			$text = self::signupSmsText(Yii::$app->request->post('source'), $user->sms_code);
+			Yii::$app->smscomponent->send(NULL, $model->phone, $text, 1);
 
 			return $result;
 		}
@@ -99,6 +100,20 @@ class AuthController extends \yii\rest\Controller
 		$result['data'] = NULL;
 
 		return $result;
+	}
+
+	/**
+	 * Login SMS text. The website (aktivexpress.uz) posts `source=web`; the mobile app sends no
+	 * `source`, so anything else gets the app text (installed app versions keep working).
+	 * Both texts must be approved in the Eskiz panel.
+	 */
+	public static function signupSmsText($source, $code)
+	{
+		if ($source === 'web') {
+			return 'aktivexpress.uz saytiga kirish uchun kod: ' . $code;
+		}
+
+		return 'Aktiv Go ilovasiga kirish uchun kod: ' . $code;
 	}
 
 	public function actionSignupCode()
